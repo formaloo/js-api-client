@@ -35,9 +35,27 @@ export interface RequestData extends ObjectData {
 }
 
 /**
+ * Formaloo update request object.
+ */
+export interface UpdateRequestData extends RequestData {
+  slug: string;
+}
+
+/**
+ * Formaloo list request object.
+ */
+export interface ListRequestData extends ObjectData {
+  token: string;
+  params?: ObjectData;
+  search?: string;
+  page?: number;
+  page_size?: number;
+  argsHeaders?: ObjectData;
+}
+
+/**
  * Formaloo request object.
  */
-
 export interface Request extends RequestData {
   url: string;
   method: string;
