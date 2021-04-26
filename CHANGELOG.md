@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/formaloo/js-api-client/compare/v1.2.0...v1.2.1) (2021-04-26)
+
+
+### Bug Fixes
+
+* fix package content being published to npm ([846f5f8](https://github.com/formaloo/js-api-client/commit/846f5f86b9c70476402c6b94d8a1f61919804037))
+
 # [1.2.0](https://github.com/formaloo/js-api-client/compare/v1.1.0...v1.2.0) (2021-04-26)
 
 
