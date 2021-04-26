@@ -164,6 +164,7 @@ export interface Activity {
   currency?: string;
   monetary_value?: unknown;
   activity_date?: Date | string;
+  tags?: RequireAtLeastOne<Omit<Tag, "description">>[];
   readonly created_at: string;
   readonly updated_at: string;
   operation_type?: OperationType;
