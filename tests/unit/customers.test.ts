@@ -26,13 +26,16 @@ const http = clientConstructor({
 const customerRequest = new Customers(http)
 
 test('customer create sends correct request', async () => {
-  const data = JSON.stringify({"key":"value"})
+  const data = {
+    email: 'unique@mail.com'
+  }
+
   await customerRequest.create({
     token: constants.token,
     data,
   })
 
   expect(axios.history.post[0].url).toBe(`${constants.baseUrl}/customers/`)
-  expect(axios.history.post[0].data).toBe(data)
+  expect(axios.history.post[0].data).toBe(JSON.stringify(data))
 
 })

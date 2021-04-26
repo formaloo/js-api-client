@@ -1,35 +1,35 @@
-import { ResponseError } from "src/types/types";
 import { FormalooTypes as Types } from "../../types";
-
 export class Customers {
   constructor(private _http: Types.HTTPClient) {}
 
-  public get(args: { slug: string }): Promise<unknown> {
-    const { slug } = args;
+  public get(
+    args: { slug: string } & Types.BaseReadRequestArgs
+  ): Promise<unknown> {
+    const { slug, token } = args;
 
     return this._http.request({
       method: "get",
       url: `/customers/${slug}/`,
+      token,
     });
   }
 
-  public list(args: Types.ListRequestData): Promise<unknown> {
-    const { page, page_size, search, params, ...requestArgs } = args;
+  public list(args: Types.ListRequestArgs): Promise<unknown> {
+    const { token, params = {} } = args;
 
     return this._http.request({
       method: "get",
       url: "/customers",
-      params: {
-        ...params,
-        page,
-        page_size,
-        search,
-      },
-      ...requestArgs,
+      params,
+      token,
     });
   }
 
-  public create(args: Types.RequestData): Promise<unknown> {
+  public create(
+    args: {
+      data: Omit<Types.Customer, "code" | "created_at" | "updated_at">;
+    } & Types.BaseWriteRequestArgs
+  ): Promise<unknown> {
     return this._http.request({
       method: "post",
       url: `/customers/`,
@@ -37,20 +37,30 @@ export class Customers {
     });
   }
 
-  public update({ slug, ...args }: Types.UpdateRequestData): Promise<unknown> {
+  public update({
+    code,
+    data,
+    ...args
+  }: {
+    code: string;
+    data: Omit<Types.Customer, "code" | "created_at" | "updated_at" | "score">;
+  } & Types.BaseWriteRequestArgs): Promise<unknown> {
     return this._http.request({
       method: "patch",
-      url: `/customers/${slug}`,
+      url: `/customers/${code}`,
+      data,
       ...args,
     });
   }
 
-  public delete(args: { slug: string }): Promise<unknown> {
-    const { slug } = args;
-
+  public delete({
+    code,
+    ...args
+  }: { code: string } & Types.BaseWriteRequestArgs): Promise<unknown> {
     return this._http.request({
       method: "delete",
-      url: `/customers/${slug}`,
+      url: `/customers/${code}`,
+      ...args,
     });
   }
 
@@ -58,10 +68,18 @@ export class Customers {
    * batch customer import
    * @summary create multiple customers using `customers_data` in body
    */
-  public batchImport(args: Types.RequestData): Promise<unknown> {
+  public batchImport({
+    data: customer_data,
+    ...args
+  }: {
+    data: Omit<Types.Customer, "code" | "created_at" | "updated_at">[];
+  } & Types.BaseWriteRequestArgs): Promise<unknown> {
     return this._http.request({
       method: "post",
       url: "/customers/batch",
+      data: {
+        customer_data,
+      },
       ...args,
     });
   }
