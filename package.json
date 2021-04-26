@@ -4,6 +4,7 @@
   "description": "JS Client SDK for Formaloo API",
   "author": "Formaloo",
   "scripts": {
+    "test": "npm run test:unit",
     "test:unit": "jest ./tests/unit",
     "test:unit:watch": "jest ./tests/unit --watch",
     "test:integration": "jest ./tests/integration",
@@ -17,7 +18,8 @@
     "prepublishOnly": "npm run build",
     "server": "node ./tests/integration/mockServer.js",
     "server:dev": "nodemon ./tests/integration/mockServer.js",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "preversion": "npm run test"
   },
   "main": "dist/index.cjs.js",
   "browser": "dist/formaloo-api.js",
