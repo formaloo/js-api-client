@@ -9,6 +9,11 @@ export const clientConstructor = ({
   writeKey,
   ...options
 }: FormalooTypes.ClientArg): FormalooTypes.HTTPClient => {
+  // create axios instance
+  const axiosInstance = axios.create({
+    baseURL: API_URL,
+  });
+
   return {
     request: (args: FormalooTypes.Request) => {
       const {
@@ -33,18 +38,19 @@ export const clientConstructor = ({
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      return axios({
-        url: requestUrl,
-        ...requestParameters,
-        data,
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "x-api-key": isWriteOnlyClient ? writeKey : apiKey,
-          ...headers,
-          ...argsHeaders,
-          ...authorization,
-        },
-      })
+      return axiosInstance
+        .request({
+          url: requestUrl,
+          ...requestParameters,
+          data,
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "x-api-key": isWriteOnlyClient ? writeKey : apiKey,
+            ...headers,
+            ...argsHeaders,
+            ...authorization,
+          },
+        })
         .then((response: any) => response.data)
         .catch((error: any) => {
           console.error(error);
