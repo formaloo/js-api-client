@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/formaloo/js-api-client/compare/v1.1.0...v1.2.0) (2021-04-26)
+
+
+### Bug Fixes
+
+* fix published assets to github release & npm ([4f90e17](https://github.com/formaloo/js-api-client/commit/4f90e1773a21431de4f029042a4ae56235dd77e6))
+
+
+### Features
+
+* add basic activity endpoints support ([55e206b](https://github.com/formaloo/js-api-client/commit/55e206be15fffa54712ea5ee56aa08a3dcffb3e5))
+* **types:**  add optional tags prop to activity interface ([87dfa54](https://github.com/formaloo/js-api-client/commit/87dfa54fa93789264daddab923ee582e1195f1ed))
+
 # [1.1.0](https://github.com/formaloo/js-api-client/compare/v1.0.0...v1.1.0) (2021-04-26)
 
 
