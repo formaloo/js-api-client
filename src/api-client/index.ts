@@ -4,7 +4,7 @@ import { Auth } from "./auth";
 import { Customers, Activities } from "./resources";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const createClient = (args: FormalooTypes.ClientArg) => {
+export const create = (args: FormalooTypes.ClientArg) => {
   const http = clientConstructor(args);
 
   return {
