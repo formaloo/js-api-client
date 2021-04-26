@@ -1,3 +1,5 @@
+import { Method } from "axios";
+
 export type RequireAtLeastOne<T> = {
   [K in keyof T]-?: Required<Pick<T, K>> &
     Partial<Pick<T, Exclude<keyof T, K>>>;
@@ -62,7 +64,7 @@ export interface ListRequestArgs extends BaseReadRequestArgs {
  */
 export interface Request extends RequestArgs {
   url: string;
-  method: string;
+  method: Method;
 }
 
 export interface PaginatedListMetaData {
