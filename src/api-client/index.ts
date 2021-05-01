@@ -7,6 +7,7 @@ import {
   ActionTypeGroups,
   ActionTypes,
   Tags,
+  Businesses,
 } from "./resources";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -20,5 +21,6 @@ export const create = (args: FormalooTypes.ClientArg) => {
     activities: new Activities(http),
     actionTypes: new ActionTypes(http),
     actionTypeGroups: new ActionTypeGroups(http),
+    businesses: new Businesses(http),
   };
 };
