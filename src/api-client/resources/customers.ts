@@ -95,4 +95,48 @@ export class Customers {
       ...args,
     });
   }
+
+  public createGdprStoredDataRequest({
+    code,
+    ...args
+  }: { code: string } & Types.BaseWriteRequestArgs): Promise<
+    Types.Response<{
+      customer_data_request: {
+        slug: string;
+        status: string;
+        description?: string;
+        created_at: string;
+        customer: Types.Customer;
+        business: Types.Business;
+      };
+    }>
+  > {
+    return this._http.request({
+      method: "post",
+      url: `/customers/${code}/gdpr-data-requests`,
+      ...args,
+    });
+  }
+
+  public createGdprDeleteDataRequest({
+    code,
+    ...args
+  }: { code: string } & Types.BaseWriteRequestArgs): Promise<
+    Types.Response<{
+      customer_delete_request: {
+        slug: string;
+        status: string;
+        description?: string;
+        created_at: string;
+        customer: Types.Customer;
+        business: Types.Business;
+      };
+    }>
+  > {
+    return this._http.request({
+      method: "post",
+      url: `/customers/${code}/gdpr-delete-requests`,
+      ...args,
+    });
+  }
 }
