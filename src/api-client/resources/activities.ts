@@ -1,11 +1,22 @@
 import { FormalooTypes as Types } from "../../types";
 
+/**
+ *
+ *
+ * @export
+ * @class Activities
+ */
 export class Activities {
   constructor(private _http: Types.HTTPClient) {}
 
-  public list(args: Types.ListRequestArgs): Promise<unknown> {
-    const { token, params = {} } = args;
-
+  public list({
+    token,
+    params = {},
+  }: Types.ListRequestArgs): Promise<
+    Types.Response<
+      { activities: Types.Activity[] } & Types.PaginatedListMetaData
+    >
+  > {
     return this._http.request({
       method: "get",
       url: "/activities",
@@ -18,7 +29,7 @@ export class Activities {
     args: {
       data: Omit<Types.Activity, "slug" | "created_at" | "updated_at">;
     } & Types.BaseWriteRequestArgs
-  ): Promise<unknown> {
+  ): Promise<Types.Response<{ activity: Types.Activity }>> {
     return this._http.request({
       method: "post",
       url: `/activities/`,
@@ -35,7 +46,9 @@ export class Activities {
     ...args
   }: {
     data: Omit<Types.Activity, "slug" | "created_at" | "updated_at">[];
-  } & Types.BaseWriteRequestArgs): Promise<unknown> {
+  } & Types.BaseWriteRequestArgs): Promise<
+    Types.Response<Types.ActivityBatchImportResponseObject>
+  > {
     return this._http.request({
       method: "post",
       url: "/activities/batch",
