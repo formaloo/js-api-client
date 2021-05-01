@@ -118,6 +118,25 @@ export interface Response<T> extends ResponseData<T>, ResponseError {
   status: HttpStatusCode;
 }
 
+export interface BaseBatchImportResponse {
+  readonly slug: string;
+  status: BatchImportStatus;
+  file: string;
+  file_type: "json" | "excel";
+  import_results: ObjectData;
+  error_log: ObjectData;
+  readonly imported_at: string;
+  readonly created_at: string;
+}
+
+export interface ActivityBatchImportResponseObject {
+  activity_batch: BaseBatchImportResponse;
+}
+
+export interface CustomerBatchImportResponseObject {
+  customer_batch: BaseBatchImportResponse;
+}
+
 /**
  *
  *
@@ -159,6 +178,15 @@ export enum OperationType {
   Read = "read",
   Update = "update",
   Delete = "delete",
+}
+
+export enum BatchImportStatus {
+  New = "new",
+  Queued = "queued",
+  InProgress = "inprogress",
+  Imported = "imported",
+  Failed = "failed",
+  Canceled = "canceled",
 }
 
 /**
@@ -295,4 +323,16 @@ export interface ActionType {
    * @memberof ActionType
    */
   group?: string;
+}
+
+export interface Business {
+  readonly slug: string;
+  readonly business_identifier: string;
+  title?: string;
+  description?: string;
+}
+
+export interface GamificationSettings {
+  cash_back_minimum: string;
+  cash_back_maximum: string;
 }
