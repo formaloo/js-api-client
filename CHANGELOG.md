@@ -1,3 +1,13 @@
+# [1.4.0](https://github.com/formaloo/js-api-client/compare/v1.3.0...v1.4.0) (2021-05-01)
+
+
+### Features
+
+* add support for business GDPR endpoint ([fc5b39b](https://github.com/formaloo/js-api-client/commit/fc5b39bb2f150900fbbcab4a9091381582a160cf))
+* add support for customer's GDPR endpoints ([8dc892b](https://github.com/formaloo/js-api-client/commit/8dc892b01628e31dcda1e50365a9cc585b7519a1))
+* add support for gamification-settings endpoints ([aafe5d8](https://github.com/formaloo/js-api-client/commit/aafe5d84419395a3c91da809d6d7d5019a870d29))
+* **types:** declare types for batch imports, gdpr, gamification & business ([b3bafee](https://github.com/formaloo/js-api-client/commit/b3bafee03d74c786e862ed887fe247c1d1a84097))
+
 # [1.3.0](https://github.com/formaloo/js-api-client/compare/v1.2.1...v1.3.0) (2021-04-27)
 
 
