@@ -4,7 +4,7 @@ export class Customers {
 
   public get(
     args: { slug: string } & Types.BaseReadRequestArgs
-  ): Promise<unknown> {
+  ): Promise<Types.Response<{ customer: Types.Customer }>> {
     const { slug, token } = args;
 
     return this._http.request({
@@ -14,7 +14,13 @@ export class Customers {
     });
   }
 
-  public list(args: Types.ListRequestArgs): Promise<unknown> {
+  public list(
+    args: Types.ListRequestArgs
+  ): Promise<
+    Types.Response<
+      { customers: Types.Customer[] } & Types.PaginatedListMetaData
+    >
+  > {
     const { token, params = {} } = args;
 
     return this._http.request({
@@ -29,7 +35,7 @@ export class Customers {
     args: {
       data: Omit<Types.Customer, "code" | "created_at" | "updated_at">;
     } & Types.BaseWriteRequestArgs
-  ): Promise<unknown> {
+  ): Promise<Types.Response<{ customer: Types.Customer }>> {
     return this._http.request({
       method: "post",
       url: `/customers/`,
@@ -44,7 +50,9 @@ export class Customers {
   }: {
     code: string;
     data: Omit<Types.Customer, "code" | "created_at" | "updated_at" | "score">;
-  } & Types.BaseWriteRequestArgs): Promise<unknown> {
+  } & Types.BaseWriteRequestArgs): Promise<
+    Types.Response<{ customer: Partial<Types.Customer> }>
+  > {
     return this._http.request({
       method: "patch",
       url: `/customers/${code}`,
@@ -56,7 +64,9 @@ export class Customers {
   public delete({
     code,
     ...args
-  }: { code: string } & Types.BaseWriteRequestArgs): Promise<unknown> {
+  }: { code: string } & Types.BaseWriteRequestArgs): Promise<
+    Types.Response<Types.EmptyObject>
+  > {
     return this._http.request({
       method: "delete",
       url: `/customers/${code}`,
@@ -73,7 +83,9 @@ export class Customers {
     ...args
   }: {
     data: Omit<Types.Customer, "code" | "created_at" | "updated_at">[];
-  } & Types.BaseWriteRequestArgs): Promise<unknown> {
+  } & Types.BaseWriteRequestArgs): Promise<
+    Types.Response<Types.CustomerBatchImportResponseObject>
+  > {
     return this._http.request({
       method: "post",
       url: "/customers/batch",
