@@ -79,7 +79,7 @@ export class Customers {
    * @summary create multiple customers using `customers_data` in body
    */
   public batchImport({
-    data: customer_data,
+    data: customers_data,
     ...args
   }: {
     data: Omit<Types.Customer, "code" | "created_at" | "updated_at">[];
@@ -90,7 +90,7 @@ export class Customers {
       method: "post",
       url: "/customers/batch",
       data: {
-        customer_data,
+        customers_data,
       },
       ...args,
     });
