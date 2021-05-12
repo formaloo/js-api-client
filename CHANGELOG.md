@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/formaloo/js-api-client/compare/v1.4.0...v1.4.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* fix customer batch import post data key typo ([5e95c19](https://github.com/formaloo/js-api-client/commit/5e95c193630f09d7ad2935e574b4a8eb5fb3da69))
+
 # [1.4.0](https://github.com/formaloo/js-api-client/compare/v1.3.0...v1.4.0) (2021-05-01)
 
 
