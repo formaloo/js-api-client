@@ -1,17 +1,22 @@
 import axios from "axios";
-import { API_URL } from "../constants";
+import { API_URL, API_VERSION } from "../constants";
 import { FormalooTypes } from "../types";
 
 // This can be used as client_credentials (API Key and Secret) or write-only (Write Key) api client
 export const clientConstructor = ({
+  baseUrl: apiBaseUrl,
+  apiVersion,
   apiKey,
   apiSecret,
   writeKey,
   ...options
 }: FormalooTypes.ClientArg): FormalooTypes.HTTPClient => {
-  // create axios instance
+  const apiUrl = apiBaseUrl || API_URL;
+  const baseURL =
+    (apiUrl.endsWith("/") ? apiUrl : apiUrl + "/") +
+    (apiVersion || API_VERSION);
   const axiosInstance = axios.create({
-    baseURL: API_URL,
+    baseURL,
   });
 
   return {
@@ -26,7 +31,7 @@ export const clientConstructor = ({
         ...otherArgs
       } = args;
 
-      const requestUrl = buildUrlWithParams(`${API_URL}${url}`, params);
+      const requestUrl = buildUrlWithParams(`${baseURL}${url}`, params);
 
       const { headers = {} } = options;
 
@@ -53,7 +58,6 @@ export const clientConstructor = ({
         })
         .then((response: any) => response.data)
         .catch((error: any) => {
-          console.error(error);
           if (error && error.response && error.response.data) {
             if (error.response.data.errors) {
               throw new Error(error.response.data.errors);
@@ -72,7 +76,7 @@ export const clientConstructor = ({
 
 export const buildUrlWithParams = (
   url: string,
-  params: FormalooTypes.ObjectData = {}
+  params: FormalooTypes.GenericObject = {}
 ): string => {
   // to prevent unnecessary django redirects
   const urlWithTrailingSlash = url.endsWith("/") ? url : url + "/";
