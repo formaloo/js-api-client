@@ -11,9 +11,9 @@ export type EmptyObject = Record<string, never>;
  * Generic Object
  *
  * @export
- * @interface ObjectData
+ * @interface GenericObject
  */
-export interface ObjectData {
+export interface GenericObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
@@ -34,9 +34,9 @@ export interface HTTPClient {
  *
  * @export
  * @interface ClientArg
- * @extends {ObjectData}
+ * @extends {GenericObject}
  */
-export interface ClientArg extends ObjectData {
+export interface ClientArg extends GenericObject {
   apiKey?: string;
   apiSecret?: string;
   writeKey: string;
@@ -67,12 +67,12 @@ export interface BaseReadRequestArgs {
  *
  * @export
  * @interface RequestArgs
- * @extends {ObjectData}
+ * @extends {GenericObject}
  */
-export interface RequestArgs extends ObjectData {
+export interface RequestArgs extends GenericObject {
   data?: unknown;
-  argsHeaders?: ObjectData;
-  params?: ObjectData;
+  argsHeaders?: GenericObject;
+  params?: GenericObject;
   token?: string;
   useWriteKey?: boolean;
 }
@@ -86,7 +86,7 @@ export interface BaseListRequestParams {
   page_size?: number;
 }
 export interface ListRequestArgs extends BaseReadRequestArgs {
-  params?: BaseListRequestParams & ObjectData;
+  params?: BaseListRequestParams & GenericObject;
 }
 
 /**
@@ -120,25 +120,6 @@ export interface Response<T> extends ResponseData<T>, ResponseError {
   status: HttpStatusCode;
 }
 
-export interface BaseBatchImportResponse {
-  readonly slug: string;
-  status: BatchImportStatus;
-  file: string;
-  file_type: "json" | "excel";
-  import_results: ObjectData;
-  error_log: ObjectData;
-  readonly imported_at: string;
-  readonly created_at: string;
-}
-
-export interface ActivityBatchImportResponseObject {
-  activity_batch: BaseBatchImportResponse;
-}
-
-export interface CustomerBatchImportResponseObject {
-  customer_batch: BaseBatchImportResponse;
-}
-
 /**
  *
  *
@@ -159,7 +140,7 @@ export interface Tag {
  */
 export interface Customer {
   readonly code: string;
-  customer_data?: ObjectData[];
+  customer_data?: GenericObject[];
   full_name?: string | null;
   email?: string;
   phone_number?: string | null;
@@ -183,12 +164,65 @@ export enum OperationType {
 }
 
 export enum BatchImportStatus {
-  New = "new",
-  Queued = "queued",
-  InProgress = "inprogress",
-  Imported = "imported",
-  Failed = "failed",
-  Canceled = "canceled",
+  NEW = "new",
+  QUEUED = "queued",
+  INPROGRESS = "inprogress",
+  IMPORTED = "imported",
+  FAILED = "failed",
+  CANCELED = "canceled",
+}
+
+type BatchImportResultBase<TypeKey extends string> = {
+  [key in TypeKey]: Array<string | number>;
+} & {
+  imported_count: number;
+  total_count: number;
+};
+
+interface BaseBatchImportResponseDataObject {
+  readonly slug: string;
+  status: "new" | "queued" | "imported" | "failed" | "inprogress" | "canceled";
+  file: string;
+  file_type: "json" | "excel";
+  readonly imported_at: string | null;
+  readonly created_at: string;
+}
+
+export interface NewImportResponseDataObject
+  extends BaseBatchImportResponseDataObject {
+  status: "new";
+}
+
+export interface QueuedImportResponseDataObject
+  extends BaseBatchImportResponseDataObject {
+  status: "queued";
+}
+
+export interface FailedImportResponseDataObject
+  extends BaseBatchImportResponseDataObject {
+  status: "failed";
+}
+
+export interface ImportedImportResponseDataObject<K extends string>
+  extends BaseBatchImportResponseDataObject {
+  status: "imported";
+  import_results: BatchImportResultBase<K>;
+  error_log: GenericObject;
+  error_log_file: string | null;
+}
+
+export type BatchImportResponseDataObject<K extends string> =
+  | NewImportResponseDataObject
+  | QueuedImportResponseDataObject
+  | ImportedImportResponseDataObject<K>
+  | FailedImportResponseDataObject;
+
+export interface ActivityBatchImportResponseObject {
+  activity_batch: BatchImportResponseDataObject<"activities">;
+}
+
+export interface CustomerBatchImportResponseObject {
+  customer_batch: BatchImportResponseDataObject<"customers">;
 }
 
 /**
@@ -199,7 +233,7 @@ export enum BatchImportStatus {
 interface ActivityRelationInstance {
   identifier_value: string | number;
   title?: string;
-  instance_data: ObjectData;
+  instance_data: GenericObject;
   entity: {
     readonly slug: string;
     model_name: string;
@@ -232,7 +266,7 @@ export interface Activity {
     email?: string;
     phone_number?: string;
   }>;
-  activity_data: ObjectData;
+  activity_data: GenericObject;
   relations?: ActivityRelation[];
   currency?: string;
   monetary_value?: unknown;
@@ -252,7 +286,7 @@ export interface ActionTypeGroup {
   readonly slug: string;
   title: string;
   description?: string;
-  default_text_template?: ObjectData;
+  default_text_template?: GenericObject;
 }
 
 /**
@@ -306,10 +340,10 @@ export interface ActionType {
    * add a series of text templates for the activities with this action type.
    * for example {"en": "An order with was the order code {order_code} was created."}
    *
-   * @type {ObjectData}
+   * @type {GenericObject}
    * @memberof ActionType
    */
-  activity_text_template?: ObjectData;
+  activity_text_template?: GenericObject;
   /**
    * how much score will a customer gain by performing an
    * activity with this action type? (as defined by action type owner.)

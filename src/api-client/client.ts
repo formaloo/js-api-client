@@ -76,7 +76,7 @@ export const clientConstructor = ({
 
 export const buildUrlWithParams = (
   url: string,
-  params: FormalooTypes.ObjectData = {}
+  params: FormalooTypes.GenericObject = {}
 ): string => {
   // to prevent unnecessary django redirects
   const urlWithTrailingSlash = url.endsWith("/") ? url : url + "/";
