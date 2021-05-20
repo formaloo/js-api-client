@@ -40,6 +40,8 @@ export interface ClientArg extends ObjectData {
   apiKey?: string;
   apiSecret?: string;
   writeKey: string;
+  baseUrl?: string;
+  apiVersion?: string;
 }
 
 /**

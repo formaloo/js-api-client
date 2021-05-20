@@ -1,7 +1,7 @@
 
 import { axios } from '../common'
 import { clientConstructor } from '../../src/api-client/client'
-import { API_URL } from '../../src/constants'
+import { API_URL, API_VERSION } from '../../src/constants'
 import { Auth } from '../../src/api-client/auth'
 import { encodeAsQuerystring } from '../../src/utils'
 
@@ -11,7 +11,7 @@ beforeEach(() => {
 })
 
 const constants = {
-  baseUrl: API_URL,
+  baseUrl: API_URL + '/' + API_VERSION,
   apiKey: 'apiKey',
   writeKey: 'writeKey',
   apiSecret: 'apiSecret',

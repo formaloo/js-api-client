@@ -1,7 +1,7 @@
 
 import { axios } from '../common'
 import { clientConstructor } from '../../src/api-client/client'
-import { API_URL } from '../../src/constants'
+import { API_URL, API_VERSION } from '../../src/constants'
 import { Activities } from '../../src/api-client/resources'
 
 beforeEach(() => {
@@ -10,7 +10,7 @@ beforeEach(() => {
 })
 
 const constants = {
-  baseUrl: API_URL,
+  baseUrl: API_URL + '/' + API_VERSION,
   apiKey: 'apiKey',
   apiSecret: 'apiSecret',
   token: 'token',
