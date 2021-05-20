@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/formaloo/js-api-client/compare/v1.4.1...v1.5.0) (2021-05-20)
+
+
+### Features
+
+* add api base url and version to client constructor args ([1ccc357](https://github.com/formaloo/js-api-client/commit/1ccc3575d9e77ee71f2d599115c7af57f6929429))
+* add status check to activities' batch import ([f1816f7](https://github.com/formaloo/js-api-client/commit/f1816f760623b212d60b51625b807d593741dddc))
+* add status check to customers' batch import ([713fe66](https://github.com/formaloo/js-api-client/commit/713fe660ee5d4770bafd5e554f32af1f64fd9eda))
+
 ## [1.4.1](https://github.com/formaloo/js-api-client/compare/v1.4.0...v1.4.1) (2021-05-12)
 
 
