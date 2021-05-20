@@ -96,6 +96,18 @@ export class Customers {
     });
   }
 
+  public getBatchImportStatus(
+    args: { slug: string } & Types.BaseReadRequestArgs
+  ): Promise<Types.Response<Types.CustomerBatchImportResponseObject>> {
+    const { slug, token } = args;
+
+    return this._http.request({
+      method: "get",
+      url: `/customers/batch/${slug}/`,
+      token,
+    });
+  }
+
   public createGdprStoredDataRequest({
     code,
     ...args
