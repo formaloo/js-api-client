@@ -56,4 +56,16 @@ export class Activities {
       ...args,
     });
   }
+
+  public getBatchImportStatus(
+    args: { slug: string } & Types.BaseReadRequestArgs
+  ): Promise<Types.Response<Types.ActivityBatchImportResponseObject>> {
+    const { slug, token } = args;
+
+    return this._http.request({
+      method: "get",
+      url: `/activities/batch/${slug}/`,
+      token,
+    });
+  }
 }
