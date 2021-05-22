@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/formaloo/js-api-client/compare/v1.5.0...v1.5.1) (2021-05-22)
+
+
+### Bug Fixes
+
+* add all possible keys to base batch import status as optional ([e1e30e9](https://github.com/formaloo/js-api-client/commit/e1e30e9a0c893e2112ca076ec1f06ecbed71f12a))
+
 # [1.5.0](https://github.com/formaloo/js-api-client/compare/v1.4.1...v1.5.0) (2021-05-20)
 
 
