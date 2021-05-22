@@ -179,32 +179,35 @@ type BatchImportResultBase<TypeKey extends string> = {
   total_count: number;
 };
 
-interface BaseBatchImportResponseDataObject {
+interface BaseBatchImportResponseDataObject<K extends string> {
   readonly slug: string;
   status: "new" | "queued" | "imported" | "failed" | "inprogress" | "canceled";
   file: string;
   file_type: "json" | "excel";
+  import_results?: BatchImportResultBase<K>;
+  error_log?: GenericObject;
+  error_log_file?: string | null;
   readonly imported_at: string | null;
   readonly created_at: string;
 }
 
-export interface NewImportResponseDataObject
-  extends BaseBatchImportResponseDataObject {
+export interface NewImportResponseDataObject<K extends string>
+  extends BaseBatchImportResponseDataObject<K> {
   status: "new";
 }
 
-export interface QueuedImportResponseDataObject
-  extends BaseBatchImportResponseDataObject {
+export interface QueuedImportResponseDataObject<K extends string>
+  extends BaseBatchImportResponseDataObject<K> {
   status: "queued";
 }
 
-export interface FailedImportResponseDataObject
-  extends BaseBatchImportResponseDataObject {
+export interface FailedImportResponseDataObject<K extends string>
+  extends BaseBatchImportResponseDataObject<K> {
   status: "failed";
 }
 
 export interface ImportedImportResponseDataObject<K extends string>
-  extends BaseBatchImportResponseDataObject {
+  extends BaseBatchImportResponseDataObject<K> {
   status: "imported";
   import_results: BatchImportResultBase<K>;
   error_log: GenericObject;
@@ -212,10 +215,10 @@ export interface ImportedImportResponseDataObject<K extends string>
 }
 
 export type BatchImportResponseDataObject<K extends string> =
-  | NewImportResponseDataObject
-  | QueuedImportResponseDataObject
+  | NewImportResponseDataObject<K>
+  | QueuedImportResponseDataObject<K>
   | ImportedImportResponseDataObject<K>
-  | FailedImportResponseDataObject;
+  | FailedImportResponseDataObject<K>;
 
 export interface ActivityBatchImportResponseObject {
   activity_batch: BatchImportResponseDataObject<"activities">;
