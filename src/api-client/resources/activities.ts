@@ -42,7 +42,7 @@ export class Activities {
    * @summary create multiple activities at once
    */
   public batchImport({
-    data,
+    data: activities_data,
     ...args
   }: {
     data: Omit<Types.Activity, "slug" | "created_at" | "updated_at">[];
@@ -52,7 +52,9 @@ export class Activities {
     return this._http.request({
       method: "post",
       url: "/activities/batch",
-      data,
+      data: {
+        activities_data,
+      },
       ...args,
     });
   }
