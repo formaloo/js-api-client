@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/formaloo/js-api-client/compare/v1.5.1...v1.5.2) (2021-05-26)
+
+
+### Bug Fixes
+
+* add missing JSON key in data object on batch activity import ([d2aa7e5](https://github.com/formaloo/js-api-client/commit/d2aa7e5c0eac2100c5d487571a8a689355a88d58))
+
 ## [1.5.1](https://github.com/formaloo/js-api-client/compare/v1.5.0...v1.5.1) (2021-05-22)
 
 
