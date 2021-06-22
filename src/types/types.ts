@@ -368,7 +368,10 @@ export interface Business {
   readonly slug: string;
   readonly business_identifier: string;
   title?: string;
-  description?: string;
+  description?: string | null;
+  website?: string | null;
+  logo?: string | null;
+  calculate_rfm?: boolean;
 }
 
 export interface GamificationSettings {
