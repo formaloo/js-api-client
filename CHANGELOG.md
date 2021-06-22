@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/formaloo/js-api-client/compare/v1.6.0...v1.6.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* fix business list response type ([ecc9fe5](https://github.com/formaloo/js-api-client/commit/ecc9fe57e28d7cf0c9cb4ac50bd04773986cbfd3))
+
 # [1.6.0](https://github.com/formaloo/js-api-client/compare/v1.5.2...v1.6.0) (2021-06-22)
 
 
