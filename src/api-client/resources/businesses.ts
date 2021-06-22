@@ -3,6 +3,18 @@ import { FormalooTypes as Types } from "../../types";
 export class Businesses {
   constructor(private _http: Types.HTTPClient) {}
 
+  public list(
+    args: Types.BaseReadRequestArgs
+  ): Promise<Types.Response<{ customer: Types.Customer }>> {
+    const { token } = args;
+
+    return this._http.request({
+      method: "get",
+      url: `/businesses/`,
+      token,
+    });
+  }
+
   public createGdprDeleteDataRequest({
     ...args
   }: { slug: string } & Types.BaseWriteRequestArgs): Promise<
