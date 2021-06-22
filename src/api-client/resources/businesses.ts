@@ -5,7 +5,7 @@ export class Businesses {
 
   public list(
     args: Types.BaseReadRequestArgs
-  ): Promise<Types.Response<{ customer: Types.Customer }>> {
+  ): Promise<Types.Response<{ businesss: Types.Business[] }>> {
     const { token } = args;
 
     return this._http.request({
