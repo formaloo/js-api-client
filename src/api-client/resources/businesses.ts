@@ -3,6 +3,18 @@ import { FormalooTypes as Types } from "../../types";
 export class Businesses {
   constructor(private _http: Types.HTTPClient) {}
 
+  public get(
+    args: { slug?: string } & Types.BaseReadRequestArgs
+  ): Promise<Types.Response<{ business: Types.Business }>> {
+    const { token, slug = "active_business" } = args;
+
+    return this._http.request({
+      method: "get",
+      url: `/businesses/${slug}/`,
+      token,
+    });
+  }
+
   public list(
     args: Types.BaseReadRequestArgs
   ): Promise<Types.Response<{ businesss: Types.Business[] }>> {
