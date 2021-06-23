@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/formaloo/js-api-client/compare/v1.6.1...v1.7.0) (2021-06-23)
+
+
+### Features
+
+* add getting current business details or by slug ([6d3f213](https://github.com/formaloo/js-api-client/commit/6d3f21361b5a54241ff8a9be5c35db9f00892183))
+
 ## [1.6.1](https://github.com/formaloo/js-api-client/compare/v1.6.0...v1.6.1) (2021-06-22)
 
 
